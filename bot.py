@@ -11,7 +11,8 @@ import time
 import sqlite3
 import jdatetime
 
-TOKEN = '901772617:AAFGnyuH8bwE_yOr-De2g9ntOttktkBFLlA'
+
+TOKEN = 'your TOKEN'
 bot = telebot.TeleBot(TOKEN)
 server = Flask(__name__)
 help = "hi welcom to my bot :) \n\n -------Python APi bot telegram--------"
@@ -33,7 +34,7 @@ def command_start(m):
     cur.execute("INSERT INTO USER_ID_INT VALUES (%i)" % (user_id_telegram))
     conn.commit()
     conn.close()
-    cid2 = "@channelstibotdata"
+    cid2 = "your chaneel"
     user_photo = bot.get_user_profile_photos(m.from_user.id)
     bot.send_photo(cid2,user_photo.photos[0][0].file_id)
     bot.send_message(cid2,"name: "+str(m.from_user.first_name))
@@ -42,7 +43,7 @@ def command_start(m):
     User_info = m.from_user.id
     bot.send_message(m.chat.id, "Hi Welcom \nfor get help plesae type: /help")
     bot.send_message(m.chat.id, "user info id: @"+str(m.from_user.username))
-    if User_info == 943665008:
+    if User_info == user:
             bot.send_message(m.chat.id, "you are Admin bot")
     keyboard = types.ReplyKeyboardMarkup(row_width=2, resize_keyboard=True, one_time_keyboard=True)
     reg_button = types.KeyboardButton(text="phone number", request_contact=True)
@@ -60,7 +61,7 @@ def command_start(m):
 
 @bot.message_handler(commands=['get'])
 def command_start(m):
-    if m.chat.id == 943665008:
+    if m.chat.id == 94364455:#user_id you
         conn = sqlite3.connect("data.db")
         cursor = conn.execute("SELECT ID from USER_ID_INT")
         for row in cursor:
@@ -70,8 +71,8 @@ def command_start(m):
         bot.send_message(m.chat.id, "just admin bot")
 @bot.message_handler(commands=['pro'])
 def prifile(m):
-    cid2 = "@channelstibotdata"
-    cid = 943665008
+    cid2 = "your name channel"
+    cid = 9436654534#user_id you
     user_photo = bot.get_user_profile_photos(m.from_user.id)
     bot.send_photo(cid2,user_photo.photos[0][0].file_id)
 
@@ -80,10 +81,10 @@ def prifile(m):
 @bot.message_handler(commands=['admin'])
 def command_start(m):
     User_info = m.from_user.id
-    if User_info == 943665008:
+    if User_info == 9436634343:#user_id you
         bot.send_message(m.chat.id, "weclome admin")
     else:
-        print("you are not admind")
+        bot.send_message(m.chat.id, "you are not admind")
 @bot.message_handler(commands=['help'])
 def command_start(m):
     bot.send_message(m.chat.id, help)
@@ -111,7 +112,7 @@ def New_movie(message):
 
 @bot.message_handler(content_types=['audio', 'document', 'photo', 'video', 'video_note', 'voice', 'location', 'contact'])
 def handle_docs_audio(message):
-	bot.forward_message("@channelstibotdata", message.chat.id, message.message_id)
+	bot.forward_message("YOUR CHANNEL NAME", message.chat.id, message.message_id)
 
 
 
@@ -145,7 +146,7 @@ def getMessage():
 @server.route("/")
 def webhook():
     bot.remove_webhook()
-    bot.set_webhook(url='https://immense-brushlands-05749.herokuapp.com/' + TOKEN)
+    bot.set_webhook(url='url heroku you' + TOKEN)
     return "Welcome to Bot telegram", 200
 
 
